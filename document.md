@@ -93,7 +93,33 @@ Create file:
 
 Add:
 
-`   export default {    name: 'product',    title: 'Product',    type: 'document',    fields: [      {        name: 'name',        title: 'Product Name',        type: 'string'      },      {        name: 'price',        title: 'Price',        type: 'number'      },      {        name: 'image',        title: 'Image',        type: 'image'      },      {        name: 'description',        title: 'Description',        type: 'text'      }    ]  }   `
+`   export default {
+  name: 'product',
+  title: 'Product',
+  type: 'document',
+  fields: [
+    {
+      name: 'name',
+      title: 'Product Name',
+      type: 'string'
+    },
+    {
+      name: 'price',
+      title: 'Price',
+      type: 'number'
+    },
+    {
+      name: 'image',
+      title: 'Image',
+      type: 'image'
+    },
+    {
+      name: 'description',
+      title: 'Description',
+      type: 'text'
+    }
+  ]
+}  `
 
 7\. Register Schema
 ===================
@@ -138,7 +164,16 @@ Create:
 
 Add:
 
-`   import { createClient } from '@sanity/client'  export const client = createClient({    projectId: 'your_project_id',    dataset: 'production',    apiVersion: '2025-01-01',    useCdn: true  })   `
+` // sanity.js
+
+import { createClient } from '@sanity/client'
+
+export const client = createClient({
+  projectId: 'wwm5f23r',
+  dataset: 'production',
+  apiVersion: '2025-01-01',
+  useCdn: true
+})  `
 
 Get projectId from:
 
@@ -149,7 +184,33 @@ Get projectId from:
 
 Example:
 
-``   import { useEffect, useState } from 'react'  import { client } from './sanity'  function App() {    const [products, setProducts] = useState([])    useEffect(() => {      client        .fetch(`*[_type == "product"]`)        .then((data) => setProducts(data))    }, [])    return (      <>        {products.map((item) => (                        {item.name} -----------              ₹{item.price}        ))}    )  }  export default App   ``
+``import { useEffect, useState } from 'react'
+import { client } from '../sanity'
+
+function App() {
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    client
+      .fetch(`*[_type == "product"]`)
+      .then((data) => {
+        console.log({ data })
+        setProducts(data)})
+  }, [])
+
+  return (
+    <div>
+      {products.map((item) => (
+        <div key={item._id}>
+          <h2>{item.name}</h2>
+          <p>₹{item.price}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export default App   ``
 
 11\. Display Images
 ===================
@@ -160,7 +221,14 @@ Install image URL helper:
 
 Create helper:
 
-`   import imageUrlBuilder from '@sanity/image-url'  import { client } from './sanity'  const builder = imageUrlBuilder(client)  export function urlFor(source) {    return builder.image(source)  }   `
+`   import imageUrlBuilder from "@sanity/image-url";
+import { client } from "./client";
+
+const builder = imageUrlBuilder(client);
+
+export function urlFor(source) {
+  return builder.image(source);
+}  `
 
 Usage:
 
@@ -213,7 +281,10 @@ Advantages:
 
 Common production architecture:
 
-`   React → Frontend UI  Node.js → APIs / Payments / Authentication  MongoDB → Users / Orders / Transactions  Sanity → CMS Content Management   `
+`   React     → Frontend UI
+Node.js   → APIs / Payments / Authentication
+MongoDB   → Users / Orders / Transactions
+Sanity    → CMS Content Management   `
 
 15\. Important Notes
 ====================
@@ -252,5 +323,3 @@ Sanity is commonly used for:
     
 *   Dynamic content management systems
     
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML
