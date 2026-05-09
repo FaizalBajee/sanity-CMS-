@@ -1,474 +1,256 @@
-\# Sanity CMS Integration with React Website
+# Sanity CMS Integration with React Website
 
-\## 1. Introduction
+## 1. Introduction
 
 Sanity is a headless CMS used to manage content separately from your frontend application.
 
 You can use Sanity to manage:
 
-\* Products
-
-\* Blogs
-
-\* Categories
-
-\* Homepage banners
-
-\* FAQs
-
-\* SEO content
-
-\* Dynamic pages
+- Products
+- Blogs
+- Categories
+- Homepage banners
+- FAQs
+- SEO content
+- Dynamic pages
 
 Your React application fetches content from Sanity using APIs.
 
-\---
+---
 
-\## 2. Architecture Flow
+## 2. Architecture Flow
 
-\`\`\`text
-
+```text
 Sanity Studio (Admin Panel)
-
-↓
-
+        ↓
 Content stored in Sanity Cloud
-
-↓
-
+        ↓
 React frontend fetches content
-
-↓
-
+        ↓
 Display data on website UI
 
-\`\`\`
 
-\---
-
-\# 3. Create a Sanity Account
+3\. Create a Sanity Account
+===========================
 
 Open:
 
-\[Sanity Official Website\](https://www.sanity.io?utm\_source=chatgpt.com)
+[Sanity Official Website](https://www.sanity.io/?utm_source=chatgpt.com)
 
 Create an account and create a new project.
 
-\---
-
-\# 4. Install Sanity CLI
+4\. Install Sanity CLI
+======================
 
 Run inside terminal:
 
-\`\`\`bash
-
-npm create sanity@latest
-
-\`\`\`
+`   npm create sanity@latest   `
 
 It will ask:
 
-\* Project name
-
-\* Dataset name
-
-\* Template selection
+*   Project name
+    
+*   Dataset name
+    
+*   Template selection
+    
 
 Choose:
 
-\`\`\`text
+`   Clean project with no predefined schemas   `
 
-Clean project with no predefined schemas
-
-\`\`\`
-
-\---
-
-\# 5. Start Sanity Studio
+5\. Start Sanity Studio
+=======================
 
 Move into project folder:
 
-\`\`\`bash
-
-cd your-sanity-project
-
-\`\`\`
+`   cd your-sanity-project   `
 
 Install dependencies:
 
-\`\`\`bash
-
-npm install
-
-\`\`\`
+`   npm install   `
 
 Start studio:
 
-\`\`\`bash
-
-npm run dev
-
-\`\`\`
+`   npm run dev   `
 
 Studio usually opens at:
 
-\`\`\`text
-
-http://localhost:3333
-
-\`\`\`
+`   http://localhost:3333   `
 
 This becomes your admin panel.
 
-\---
-
-\# 6. Create Product Schema
+6\. Create Product Schema
+=========================
 
 Inside:
 
-\`\`\`text
-
-schemaTypes/
-
-\`\`\`
+`   schemaTypes/   `
 
 Create file:
 
-\`\`\`text
-
-product.js
-
-\`\`\`
+`   product.js   `
 
 Add:
 
-\`\`\`js
+`   export default {    name: 'product',    title: 'Product',    type: 'document',    fields: [      {        name: 'name',        title: 'Product Name',        type: 'string'      },      {        name: 'price',        title: 'Price',        type: 'number'      },      {        name: 'image',        title: 'Image',        type: 'image'      },      {        name: 'description',        title: 'Description',        type: 'text'      }    ]  }   `
 
-export default {
-
-name: 'product',
-
-title: 'Product',
-
-type: 'document',
-
-fields: \[
-
-{
-
-name: 'name',
-
-title: 'Product Name',
-
-type: 'string'
-
-},
-
-{
-
-name: 'price',
-
-title: 'Price',
-
-type: 'number'
-
-},
-
-{
-
-name: 'image',
-
-title: 'Image',
-
-type: 'image'
-
-},
-
-{
-
-name: 'description',
-
-title: 'Description',
-
-type: 'text'
-
-}
-
-\]
-
-}
-
-\`\`\`
-
-\---
-
-\# 7. Register Schema
+7\. Register Schema
+===================
 
 Inside:
 
-\`\`\`text
-
-schemaTypes/index.js
-
-\`\`\`
+`   schemaTypes/index.js   `
 
 Add:
 
-\`\`\`js
 
-import product from './product'
+`   import product from './product'  export const schemaTypes = [product]   `
 
-export const schemaTypes = \[product\]
-
-\`\`\`
-
-\---
-
-\# 8. Add Content
+8\. Add Content
+===============
 
 Open studio:
 
-\`\`\`text
-
-http://localhost:3333
-
-\`\`\`
+`   http://localhost:3333   `
 
 You can now:
 
-\* Create products
+*   Create products
+    
+*   Upload images
+    
+*   Edit content
+    
+*   Publish data
+    
 
-\* Upload images
-
-\* Edit content
-
-\* Publish data
-
-\---
-
-\# 9. Connect Sanity with React
+9\. Connect Sanity with React
+=============================
 
 Install client package:
 
-\`\`\`bash
-
-npm install @sanity/client
-
-\`\`\`
+`   npm install @sanity/client   `
 
 Create:
 
-\`\`\`text
-
-sanity.js
-
-\`\`\`
+`   sanity.js   `
 
 Add:
 
-\`\`\`js
+`   import { createClient } from '@sanity/client'  export const client = createClient({    projectId: 'your_project_id',    dataset: 'production',    apiVersion: '2025-01-01',    useCdn: true  })   `
 
-import { createClient } from '@sanity/client'
+Get projectId from:
 
-export const client = createClient({
+`   sanity.config.js   `
 
-projectId: 'your\_project\_id',
-
-dataset: 'production',
-
-apiVersion: '2025-01-01',
-
-useCdn: true
-
-})
-
-\`\`\`
-
-Get \`projectId\` from:
-
-\`\`\`text
-
-sanity.config.js
-
-\`\`\`
-
-\---
-
-\# 10. Fetch Data in React
+10\. Fetch Data in React
+========================
 
 Example:
 
-\`\`\`jsx
+``   import { useEffect, useState } from 'react'  import { client } from './sanity'  function App() {    const [products, setProducts] = useState([])    useEffect(() => {      client        .fetch(`*[_type == "product"]`)        .then((data) => setProducts(data))    }, [])    return (      <>        {products.map((item) => (                        {item.name} -----------              ₹{item.price}        ))}    )  }  export default App   ``
 
-import { useEffect, useState } from 'react'
-
-import { client } from './sanity'
-
-function App() {
-
-const \[products, setProducts\] = useState(\[\])
-
-useEffect(() => {
-
-client
-
-.fetch(\`\*\[\_type == "product"\]\`)
-
-.then((data) => setProducts(data))
-
-}, \[\])
-
-return (
-
-{products.map((item) => (
-
-{item.name}
------------
-
-₹{item.price}
-
-))}
-
-)
-
-}
-
-export default App
-
-\`\`\`
-
-\---
-
-\# 11. Display Images
+11\. Display Images
+===================
 
 Install image URL helper:
 
-\`\`\`bash
-
-npm install @sanity/image-url
-
-\`\`\`
+`   npm install @sanity/image-url   `
 
 Create helper:
 
-\`\`\`js
-
-import imageUrlBuilder from '@sanity/image-url'
-
-import { client } from './sanity'
-
-const builder = imageUrlBuilder(client)
-
-export function urlFor(source) {
-
-return builder.image(source)
-
-}
-
-\`\`\`
+`   import imageUrlBuilder from '@sanity/image-url'  import { client } from './sanity'  const builder = imageUrlBuilder(client)  export function urlFor(source) {    return builder.image(source)  }   `
 
 Usage:
 
-\`\`\`jsx
+`   ![{item.name}]({urlFor(item.image).url()})   `
 
-![]({urlFor(item.image).url()})
-
-\`\`\`
-
-\---
-
-\# 12. Recommended Ecommerce Collections
+12\. Recommended Ecommerce Collections
+======================================
 
 Typical ecommerce structure:
 
-\* Products
+*   Products
+    
+*   Categories
+    
+*   Brands
+    
+*   Orders
+    
+*   Coupons
+    
+*   Banners
+    
+*   Blogs
+    
+*   Testimonials
+    
 
-\* Categories
-
-\* Brands
-
-\* Orders
-
-\* Coupons
-
-\* Banners
-
-\* Blogs
-
-\* Testimonials
-
-\---
-
-\# 13. Why Developers Use Sanity
+13\. Why Developers Use Sanity
+==============================
 
 Advantages:
 
-\* Fast performance
+*   Fast performance
+    
+*   Real-time updates
+    
+*   Flexible schema system
+    
+*   Cloud hosted
+    
+*   Easy admin panel
+    
+*   Great React/Next.js integration
+    
+*   Optimized image delivery
+    
 
-\* Real-time updates
-
-\* Flexible schema system
-
-\* Cloud hosted
-
-\* Easy admin panel
-
-\* Great React/Next.js integration
-
-\* Optimized image delivery
-
-\---
-
-\# 14. MERN + Sanity Architecture
+14\. MERN + Sanity Architecture
+===============================
 
 Common production architecture:
 
-\`\`\`text
+`   React → Frontend UI  Node.js → APIs / Payments / Authentication  MongoDB → Users / Orders / Transactions  Sanity → CMS Content Management   `
 
-React → Frontend UI
-
-Node.js → APIs / Payments / Authentication
-
-MongoDB → Users / Orders / Transactions
-
-Sanity → CMS Content Management
-
-\`\`\`
-
-\---
-
-\# 15. Important Notes
+15\. Important Notes
+====================
 
 Sanity should mainly be used for content management.
 
 Do NOT store:
 
-\* Payment secrets
-
-\* JWT secrets
-
-\* Authentication logic
-
-\* Sensitive backend credentials
+*   Payment secrets
+    
+*   JWT secrets
+    
+*   Authentication logic
+    
+*   Sensitive backend credentials
+    
 
 These should remain in your backend server.
 
-\---
-
-\# 16. Typical Use Cases
+16\. Typical Use Cases
+======================
 
 Sanity is commonly used for:
 
-\* Ecommerce websites
+*   Ecommerce websites
+    
+*   Portfolio websites
+    
+*   Blogs
+    
+*   Company websites
+    
+*   Landing pages
+    
+*   News portals
+    
+*   Dynamic content management systems
+    
 
-\* Portfolio websites
-
-\* Blogs
-
-\* Company websites
-
-\* Landing pages
-
-\* News portals
-
-\* Dynamic content management systems
+Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML
