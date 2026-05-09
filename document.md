@@ -322,4 +322,117 @@ Sanity is commonly used for:
 *   News portals
     
 *   Dynamic content management systems
+
+
+//
+
+
+Sanity CMS – Free Plan Overview for Educational Institute Website
+=================================================================
+
+We are using Sanity to manage website content through an admin panel.
+
+This allows easy management of:
+
+*   Courses
+    
+*   Announcements
+    
+*   Events
+    
+*   Gallery Images
+    
+*   Faculty Details
+    
+*   Student Information Pages
+    
+*   Blogs / News Updates
+    
+*   Homepage Banners
+    
+
+without changing website code.
+
+Free Plan Limits
+================
+
+Sanity provides a free plan that is suitable for most educational institute websites.
+
+### Free Plan Includes
+
+FeatureFree LimitContent Items (Documents)10,000Monthly Website Requests1,000,000Admin UsersUp to 20File/Image Storage100 GB
+
+What is a “Document”?
+=====================
+
+Each content item counts as 1 document.
+
+Examples:
+
+*   1 Course = 1 Document
+    
+*   1 Event = 1 Document
+    
+*   1 Faculty Profile = 1 Document
+    
+*   1 Blog Post = 1 Document
+    
+*   1 Banner = 1 Document
+    
+
+Example:
+
+If the website contains:
+
+*   200 Courses
+    
+*   100 Faculty Profiles
+    
+*   50 Events
+    
+*   200 News/Blog Posts
+    
+*   20 Homepage Banners
+    
+
+Total usage is only around:
+
+Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   570 Documents   `
+
+which is far below the free limit of 10,000 documents.
+
+What is “1 Million Requests”?
+=============================
+
+Whenever visitors open the website and content loads, it counts as a request.
+
+Example:
+
+*   Students visiting course pages
+    
+*   Users opening event pages
+    
+*   Visitors checking announcements
+    
+
+Even with regular daily traffic, the free plan is usually sufficient for educational institute websites.
+
+When Paid Plan May Be Needed
+============================
+
+A paid plan may only be required if:
+
+*   Website traffic becomes very high
+    
+*   Very large number of content updates
+    
+*   Large team/admin access is needed
+    
+*   Heavy storage usage for media files
+    
+
+Conclusion
+==========
+
+For a standard educational institute website, the free plan of Sanity is generally more than enough for managing website content efficiently.
     
